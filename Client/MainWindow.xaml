@@ -1,12 +1,74 @@
-﻿<Window x:Class="Client.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="Client.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Custom Title Bar" 
+        Height="550"
+        Width="900"
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" Cursor="" BorderBrush="#FF1534AF" BorderThickness="0.4,0.4,0.4,0.4"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.Resources>
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
+    </Window.Resources>
+    <Border CornerRadius="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    </Grid>
+            <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Height="30" Background="#FF1534AF">
+                <Button x:Name="CloseButton" Click="CloseButton_Click" Width="30" DockPanel.Dock="Right" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Background="Transparent" Foreground="White" BorderBrush="{x:Null}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <materialDesign:PackIcon Name="icon" Kind="Close" Height="28" HorizontalAlignment="Center" Width="29" VerticalAlignment="Center" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="MinimizeButton" Click="MinimizeButton_Click" Width="30" HorizontalAlignment="Right" DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" Background="Transparent" Foreground="White" BorderBrush="{x:Null}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <materialDesign:PackIcon Name="icon" Kind="WindowMinimize" Height="20" HorizontalAlignment="Center" Width="20" VerticalAlignment="Center" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
+
+            <Frame x:Name="MainFrame" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+            <Label Grid.Column="1" Content="Система учета писем v1.1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#DDFFFFFF" RenderTransformOrigin="-0.514,-1.339" FontSize="16"/>
+        </Grid>
+    </Border>
 </Window>
