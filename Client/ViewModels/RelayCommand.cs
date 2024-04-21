@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace PictureSender.Client.ViewModels
 {
-    public class RelayCommand
+    public class RelayCommand : ICommand
     {
         private readonly Func<Task> execute;
         private readonly Func<bool> canExecute;

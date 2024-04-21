@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PictureSender.Client.Pages;
+using PictureSender.Client.ViewModels;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
@@ -14,31 +15,12 @@ namespace Client
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            // Configure the DI container
             var serviceProvider = new ServiceCollection()
-                //.AddScoped<IBaseService, BaseService>()
-                //.AddScoped<IOutboxMessageService, OutboxMessageService>()
-                //.AddScoped<IExternalRecipientService, ExternalRecipientService>()
-                //.AddScoped<IUnitOfWork>(s => new SqliteUnitOfWork("MessageTrack.db"))
-                //.AddSingleton(s =>
-                //{
-                //    var configuration = new MapperConfiguration(cfg =>
-                //    {
-                //        cfg.AddProfile<ExternalRecipientProfile>();
-                //        cfg.AddProfile<OutboxMessageProfile>();
-                //    });
-
-                //    configuration.CompileMappings();
-
-                //    return configuration.CreateMapper();
-                //})
                 .AddSingleton<MainWindow>()
                 .AddScoped<MainPage>()
-                //.AddScoped<MainPageViewModel>()
-                //.AddTransient<DataPage>()
-                //.AddTransient<DataViewModel>()
-                //.AddTransient<SelectRecipientsModal>()
-                //.AddTransient<SelectRecipientsViewModel>()
+                .AddScoped<MainPageViewModel>()
+                .AddTransient<DetailPage>()
+                .AddTransient<DetailPageViewModel>()
                 .AddSerilog(GetConfiguredLogger())
                 .BuildServiceProvider();
 
