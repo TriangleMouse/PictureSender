@@ -10,7 +10,8 @@
       Background="{DynamicResource MaterialDesignPaper}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage">
+      Title="MainPage"
+      >
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding LoadDataCommand}" />
@@ -36,10 +37,16 @@
                 </Button.Cursor>
             </Button>
         </DockPanel>
-        <DataGrid x:Name="DataGridMessages"  ItemsSource="{Binding Messages}" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Stretch">
+        <DataGrid>
             <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn Header ="Регистрационный номер"  Binding="{Binding RegNumber}" SortMemberPath="RegNumberForSorting" Width="*"/>
-                <materialDesign:DataGridTextColumn Header ="Дата создания"  Binding="{Binding DateCreated, StringFormat='dd MMMM yyyy', ConverterCulture='ru-RU'}"  SortMemberPath="DateCreated" Width="*"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Text}" Width="600"/>
+                <DataGridTemplateColumn Header="Картинка">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Image}" Height="150" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
             <DataGrid.ItemContainerStyle>
                 <Style TargetType="DataGridRow">
@@ -56,8 +63,8 @@
             </DataGrid.ItemContainerStyle>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" 
-                          Command="{Binding ViewCommand}" 
-                          CommandParameter="{Binding ElementName=DataGridMessages, Path=SelectedItem}" />
+                              Command="{Binding ViewCommand}" 
+                              CommandParameter="{Binding ElementName=DataGridMessages, Path=SelectedItem}" />
             </DataGrid.InputBindings>
         </DataGrid>
     </DockPanel>

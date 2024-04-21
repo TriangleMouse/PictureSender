@@ -68,7 +68,7 @@
             </DockPanel>
 
             <Frame x:Name="MainFrame" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
-            <Label Grid.Column="1" Content="Система учета писем v1.1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#DDFFFFFF" RenderTransformOrigin="-0.514,-1.339" FontSize="16"/>
+            <Label Grid.Column="1" Content=" v1.0" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#DDFFFFFF" RenderTransformOrigin="-0.514,-1.339" FontSize="16"/>
         </Grid>
     </Border>
 </Window>

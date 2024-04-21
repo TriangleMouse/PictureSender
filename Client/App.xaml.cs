@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PictureSender.Client.Pages;
 using Serilog;
-using System.Configuration;
-using System.Data;
-using System.Windows;
-using Serilog.Events;
 using Serilog.Core;
+using Serilog.Events;
+using System.Windows;
 
 namespace Client
 {
@@ -34,7 +33,7 @@ namespace Client
                 //    return configuration.CreateMapper();
                 //})
                 .AddSingleton<MainWindow>()
-                //.AddScoped<MainPage>()
+                .AddScoped<MainPage>()
                 //.AddScoped<MainPageViewModel>()
                 //.AddTransient<DataPage>()
                 //.AddTransient<DataViewModel>()
@@ -43,14 +42,16 @@ namespace Client
                 .AddSerilog(GetConfiguredLogger())
                 .BuildServiceProvider();
 
-            // Resolve the MainWindow and set it as the application's main window
-
             var mainWindow = serviceProvider.GetService<MainWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);
         }
 
+        /// <summary>
+        /// Конфигурирует Serilog
+        /// </summary>
+        /// <returns>Конфигурация логера</returns>
         private static Logger GetConfiguredLogger()
         {
             var logPath = string.Concat(AppDomain.CurrentDomain.BaseDirectory, "\\Logs\\log.log");
