@@ -21,4 +21,8 @@
     <Folder Include="Pages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PictureSender.Shared\PictureSender.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
