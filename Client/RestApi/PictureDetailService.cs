@@ -1,55 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using PictureSender.Client.Interfaces.APIServices;
+﻿using PictureSender.Client.Interfaces.APIServices;
 using PictureSender.Client.RestApi.Base;
+using PictureSender.Shared.Constants.ApiConstants;
 using Serilog;
+using System.Net.Http;
 
 namespace PictureSender.Client.RestApi
 {
     public class PictureDetailService : BaseApiService, IPictureDetailService
     {
-        public PictureDetailService() : base()
+        public PictureDetailService() : base(new HttpClient(), PictureDetailApiConstants.Controller)
         {
 
         }
 
-        /// <inheritdoc/>
-        public async Task<ResponseModel<GetPackageResponse>> ReceiveOnePackage(int page, int size = 1)
+        public async Task SavePictureDetail()
         {
-            var token = await GetToken();
-            var getPackageRequest = new GetPackageRequest(page, size, true);
-            var endpointUrl = GetEndpoint("package");
-            var httpRequest = CreateHttpRequest(endpointUrl, HttpMethod.Post);
-
-            SetHeaders(httpRequest, headers);
-            SetRequestContent(httpRequest, getPackageRequest, "application/json");
-
-            var httpResponse = await SendRequest(httpRequest, ActionHttpRequestType.GetPackage);
-
-            var response = await DeserializeResponse<GetPackageResponse>(Resource.ReceiveOnePackageLocation, httpResponse);
-
-            return response;
+            //var endpointUrl = GetEndpoint("package");
         }
 
-        /// <inheritdoc/>
-        public async Task ConfirmPackage(string packageGUID, string confirmId)
+        public async Task GetAllPictureDetail()
         {
-            Log.Information(Resource.StartSendConfirmationInfoText, packageGUID);
-
-            var token = await GetToken();
-            var endpointUrl = GetEndpoint("package/confirm/" + confirmId);
-            var headers = GetHeaders(token);
+            var endpointUrl = GetEndpoint(PictureDetailApiConstants.GetAllEndPoint);
             var httpRequest = CreateHttpRequest(endpointUrl, HttpMethod.Get);
+            var httpResponse = await SendRequest(httpRequest);
 
-            SetHeaders(httpRequest, headers);
-
-            var httpResponse = await SendRequest(httpRequest, ActionHttpRequestType.ConfirmPackage);
-
-            await DeserializeResponse<object>(Resource.SendConfirmationLocation, httpResponse);
+            await DeserializeResponse<object>(httpResponse);
         }
     }
 }
