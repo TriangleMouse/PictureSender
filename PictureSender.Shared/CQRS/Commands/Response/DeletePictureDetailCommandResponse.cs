@@ -1,4 +1,4 @@
-﻿namespace PictureSender.Server.CQRS.Commands.Response
+﻿namespace PictureSender.Shared.CQRS.Commands.Response
 {
     public class DeletePictureDetailCommandResponse
     {

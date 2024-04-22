@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PictureSender.Server.CQRS.Commands.Request;
-using PictureSender.Server.CQRS.Commands.Response;
+using PictureSender.Shared.CQRS.Commands.Request;
+using PictureSender.Shared.CQRS.Commands.Response;
 
 namespace PictureSender.Server.CQRS.Handlers.CommandHandlers
 {

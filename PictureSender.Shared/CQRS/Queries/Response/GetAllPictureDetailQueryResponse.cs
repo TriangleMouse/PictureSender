@@ -1,4 +1,4 @@
-﻿namespace PictureSender.Server.CQRS.Queries.Response
+﻿namespace PictureSender.Shared.CQRS.Queries.Response
 {
     public class GetAllPictureDetailQueryResponse
     {

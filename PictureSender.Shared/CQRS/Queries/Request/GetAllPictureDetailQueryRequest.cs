@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using PictureSender.Server.CQRS.Queries.Response;
+using PictureSender.Shared.CQRS.Queries.Response;
 
-namespace PictureSender.Server.CQRS.Queries.Request
+namespace PictureSender.Shared.CQRS.Queries.Request
 {
     public class GetAllPictureDetailQueryRequest : IRequest<List<GetAllPictureDetailQueryResponse>>
     {

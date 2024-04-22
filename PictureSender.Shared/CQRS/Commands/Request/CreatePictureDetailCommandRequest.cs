@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using PictureSender.Server.CQRS.Commands.Response;
+using PictureSender.Shared.CQRS.Commands.Response;
 
-namespace PictureSender.Server.CQRS.Commands.Request
+namespace PictureSender.Shared.CQRS.Commands.Request
 {
     public class CreatePictureDetailCommandRequest : IRequest<CreatePictureDetailCommandResponse>
     {
