@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PictureSender.Server.CQRS.Commands.Request;
-using PictureSender.Server.CQRS.Commands.Response;
-using PictureSender.Server.CQRS.Queries.Request;
+using PictureSender.Shared.Constants.ApiConstants;
+using PictureSender.Shared.CQRS.Commands.Request;
+using PictureSender.Shared.CQRS.Commands.Response;
+using PictureSender.Shared.CQRS.Queries.Request;
 
 namespace PictureSender.Server.Controllers
 {
@@ -17,16 +18,15 @@ namespace PictureSender.Server.Controllers
             _mediator = mediator;
         }
 
-
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllPictureDetailQueryRequest request)
+        [HttpGet(PictureDetailApiConstants.GetAllEndPoint)]
+        public async Task<IActionResult> GetAll([FromQuery] GetAllPictureDetailQueryRequest request)
         {
-            var allBooks = await _mediator.Send(request);
+            var pictureDetails = await _mediator.Send(request);
 
-            return Ok(allBooks);
+            return Ok(pictureDetails);
         }
 
-        [HttpPost]
+        [HttpPost(PictureDetailApiConstants.SaveEndPoint)]
         public async Task<IActionResult> Save([FromBody] CreatePictureDetailCommandRequest request)
         {
             CreatePictureDetailCommandResponse response = await _mediator.Send(request);
@@ -34,7 +34,7 @@ namespace PictureSender.Server.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete($"{PictureDetailApiConstants.DeleteEndPoint}/{{id}}")]
         public async Task<IActionResult> Delete([FromQuery] DeletePictureDetailCommandRequest request)
         {
             DeletePictureDetailCommandResponse response = await _mediator.Send(request);
